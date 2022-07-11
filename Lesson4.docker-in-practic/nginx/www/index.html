@@ -32,19 +32,44 @@
 		.quote {
 			font-size:4vw;
 		}
+		.checkbox-label {
+			font-size: 2vw;
+		}
+		.checkbox {
+			filter: invert(5%) hue-rotate(39deg) brightness(1.7);
+		}
+		.color {
+			display: inline-block;
+		}
 	</style>
 </head>
 
 <body>
 	<div class="center">
 		<h1 class="title">Генератор Названий Спринтов</h1>
-		<input type="submit" class="button" value="Тык!" onclick="submit()">
+		<input id="button" type="submit" class="button" value="Тык!" onclick="submit()">
 		<p id="quote" class="quote"></p>
+		<label class="checkbox-label">
+			<input id="checkbox" class="checkbox" type="checkbox" value="цвет!"name="happy" onclick="toggleColor()">
+			<div id="txt" class="color">  цвет!</div>
+		</label>
 
 		<script>
+			let isColorEnabled = false;
+			let letters = document.querySelector('#txt').innerHTML.split('');
+			function toggleColor() {
+				isColorEnabled = !isColorEnabled;
+			}
+			randomColoredText();
 			function submit() {
-				axios.get('/quote')
+				axios.get('/quote') //or http://localhost:3000/quote for local development
 					.then(function (response) {
+						if (isColorEnabled) {
+							document.getElementById("quote").style.color="#" + Math.floor(Math.random()*16777215).toString(16);
+							randomColoredText();
+						} else {
+							document.getElementById("quote").style.color="black";
+						}
 						document.getElementById("quote").innerHTML=response.data
 					})
 					.catch(function (error) {
@@ -52,7 +77,53 @@
 					});
 			}
 
+			function randomColoredText() {
+				/**
+				 * Random colored text
+				 * <rabbitfighter@cryptolab.net>
+				 */
+
+				// Converts integer to hex
+				const colToHex = (c) => {
+					// Hack so colors are bright enough
+					let color = (c < 75) ? c + 75 : c
+					let hex = color.toString(16);
+					return hex.length == 1 ? "0" + hex : hex;
+				}
+
+				// uses colToHex to concatenate a full 6 digit hex code
+				const rgbToHex = (r,g,b) => {
+					return "#" + colToHex(r) + colToHex(g) + colToHex(b);
+				}
+
+				// Returns three random 0-255 integers
+				const getRandomColor = () => {
+					return rgbToHex(
+							Math.floor(Math.random() * 255),
+							Math.floor(Math.random() * 255),
+							Math.floor(Math.random() * 255));
+				}
+
+				// This is the prototype function that changes the color of each
+				// letter by wrapping it in a span element.
+				Array.prototype.randomColor = function() {
+					let html = '';
+					this.map( (letter) => {
+						let color = getRandomColor();
+						html +=
+								"<span style=\"color:" + color + "\">"
+								+ letter +
+								"</span>";
+					})
+					return html;
+				};
+
+				// Set the text
+				document.querySelector('#txt').innerHTML = letters.randomColor();
+			}
+
 		</script>
+
 	</div>
 
 </body>
