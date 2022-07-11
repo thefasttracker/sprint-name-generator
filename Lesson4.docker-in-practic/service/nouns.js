@@ -1,4 +1,4 @@
-export const nouns = [
+module.exports = [
     "год",
     "человек",
     "время",

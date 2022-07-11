@@ -1,4 +1,4 @@
-export const adjectives = [
+module.exports = [
     "новый",
     "хороший",
     "должный",

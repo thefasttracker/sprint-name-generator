@@ -1,7 +1,6 @@
-import {adjectives} from "./adjectives";
-import {nouns} from "./nouns";
-
 const http = require('http')
+const adjectives = require('./adjectives');
+const nouns = require("./nouns");
 
 const port = 3000
 
