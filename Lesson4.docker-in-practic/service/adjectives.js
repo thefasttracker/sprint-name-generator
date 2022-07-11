@@ -1,4 +1,4 @@
-exports.adjectives = [
+const adjectives = [
     "новый",
     "хороший",
     "должный",
@@ -1000,3 +1000,5 @@ exports.adjectives = [
     "неудачный",
     "лунный"
 ]
+
+module.exports = adjectives;

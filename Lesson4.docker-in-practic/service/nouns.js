@@ -1,4 +1,4 @@
-exports.nouns = [
+const nouns = [
     "год",
     "человек",
     "время",
@@ -1000,3 +1000,5 @@ exports.nouns = [
     "мина",
     "полномочие"
 ]
+
+module.exports = nouns;
