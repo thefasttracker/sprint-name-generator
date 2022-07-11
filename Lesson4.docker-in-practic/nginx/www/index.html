@@ -10,15 +10,36 @@
 			justify-content: center;
 			align-items: center;
 			flex-direction: column;
+			text-align: center;
+		}
+		.button {
+			background-color: #2196f3;
+			border: none;
+			border-radius: 12px;
+			color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 3vw;
+			margin: 4px 2px;
+			cursor: pointer;
+			box-shadow: 9px 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+		}
+		.title {
+			font-size:5vw;
+		}
+		.quote {
+			font-size:4vw;
 		}
 	</style>
 </head>
 
 <body>
 	<div class="center">
-		<h1>Генератор Названий Спринтов</h1>
-		<input type="submit" value="Тык!" onclick="submit()">
-		<p id="quote"></p>
+		<h1 class="title">Генератор Названий Спринтов</h1>
+		<input type="submit" class="button" value="Тык!" onclick="submit()">
+		<p id="quote" class="quote"></p>
 
 		<script>
 			function submit() {
